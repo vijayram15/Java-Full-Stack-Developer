@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "React JS/Interview Questions/Interview Questions.md",
+                "file": "React JS/Micro Frontend.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Interview Questions"
+              "title": "Micro Frontend"
             }
           }
         ]
@@ -154,10 +154,11 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "240e4853c76301b4",
+  "active": "7d8a0d6472362df2",
   "lastOpenFiles": [
-    "Java/2. Data Types & Variables.md",
     "React JS/Interview Questions/Interview Questions.md",
+    "React JS/Micro Frontend.md",
+    "Java/2. Data Types & Variables.md",
     "React JS/Interview Questions",
     "Java/Interview Questions/2. SerialVersionUID.md",
     "/Java/Interview Questions/2. SerialVersionUID.md",
