@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java/2. Data Types & Variables.md",
+                "file": "React JS/Interview Questions/Interview Questions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2. Data Types & Variables"
+              "title": "Interview Questions"
             }
           }
         ]
@@ -156,6 +156,9 @@
   },
   "active": "240e4853c76301b4",
   "lastOpenFiles": [
+    "Java/2. Data Types & Variables.md",
+    "React JS/Interview Questions/Interview Questions.md",
+    "React JS/Interview Questions",
     "Java/Interview Questions/2. SerialVersionUID.md",
     "/Java/Interview Questions/2. SerialVersionUID.md",
     "/Java/Interview Questions/1. Collections/Comparable Vs Comparator.md",
@@ -168,7 +171,6 @@
     "/Java",
     "Java/1. OOPs.md",
     "Java/0. Java Topics.md",
-    "Java/2. Data Types & Variables.md",
     "AWS/0. AWS Topics.md",
     "Knowledge.md",
     "/Knowledge.md"
