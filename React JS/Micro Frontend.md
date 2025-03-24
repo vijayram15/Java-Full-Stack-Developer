@@ -146,7 +146,7 @@ Here’s a simplified structure for a micro frontend setup:
 ```
 
 ---
-Extracting a module from an existing project to create a micro frontend involves several steps. I'll guide you through the process with a detailed explanation and a full-fledged example, including both host and remote code.
+**Extracting a module** from an existing project to create a micro frontend involves several steps. I'll guide you through the process with a detailed explanation and a full-fledged example, including both host and remote code.
 
 ---
 
@@ -387,4 +387,4 @@ Visit `http://localhost:3000` to see the host application consuming the `Product
 
 ---
 
-This setup demonstrates how to extract a module from an existing project and integrate it as a micro frontend using Webpack Module Federation. Let me know if you'd like further clarification or enhancements!
+This setup demonstrates how to extract a module from an existing project and integrate it as a micro frontend using Webpack Module Federation.
