@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "React JS/Micro Frontend.md",
+                "file": "Java/Interview Questions/JDK differences.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Micro Frontend"
+              "title": "JDK differences"
             }
           }
         ]
@@ -156,8 +156,9 @@
   },
   "active": "7d8a0d6472362df2",
   "lastOpenFiles": [
-    "React JS/Interview Questions/Interview Questions.md",
     "React JS/Micro Frontend.md",
+    "Java/Interview Questions/JDK differences.md",
+    "React JS/Interview Questions/Interview Questions.md",
     "Java/2. Data Types & Variables.md",
     "React JS/Interview Questions",
     "Java/Interview Questions/2. SerialVersionUID.md",
