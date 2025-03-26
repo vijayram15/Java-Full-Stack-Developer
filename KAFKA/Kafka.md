@@ -688,3 +688,236 @@ If you need a longer period for all subscribers to consume messages:
   bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic orders-topic --config retention.ms=604800000
   ```
   (This sets retention to 7 days.)
+
+---
+
+For text-based payloads and scenarios where all consumers are actively listening, shorter retention periods and smaller retention sizes are practical and efficient. Here's how you can tailor the retention settings for such a use case:
+
+---
+
+### 1. **Retention Time Configuration**
+Set the **retention.ms** property to 1 hour:
+```properties
+log.retention.ms=3600000  # 1 hour (1 hour = 60 * 60 * 1000 milliseconds)
+```
+
+This ensures messages are deleted after an hour, minimizing unnecessary storage usage while keeping data available for active consumers.
+
+---
+
+### 2. **Retention Size Configuration**
+If your payloads are small and text-based, set the **retention.bytes** property to 1GB:
+```properties
+log.retention.bytes=1073741824  # 1GB (1GB = 1024 * 1024 * 1024 bytes)
+```
+
+This will enforce size-based retention, ensuring the topic log doesn’t exceed 1GB even if the message volume spikes.
+
+---
+
+### 3. **Best Practices for These Settings**
+- **Monitor Throughput**: Use metrics to ensure that 1 hour and 1GB retention settings are sufficient for your topic's traffic.
+- **Adjust Dynamically**: If your traffic increases or payloads grow larger, consider scaling up retention time or size.
+- **Partitions vs Consumers**: Ensure you have an optimal partition count so your consumers can process data efficiently.
+
+---
+
+### 4. **Scenario Example: Real-Time Notifications**
+Imagine a real-time notification system:
+- Messages are short (e.g., "Order confirmed") and consumed within seconds.
+- Retention for longer periods is unnecessary since all consumers are listening actively.
+
+By setting `log.retention.ms=3600000` and `log.retention.bytes=1073741824`, you streamline storage while supporting rapid consumption.
+
+---
+
+An **Apache Kafka Spring Boot project example** with **Swagger integration** for API documentation and testing the **Consumer in Producer code** and **Producer in Consumer code**. I'll break this into sections to keep it clear.
+
+---
+
+### 1. **Project Setup**
+
+#### Maven Dependencies
+Add the following dependencies for Kafka, Spring Boot, Swagger, and testing:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.kafka</groupId>
+    <artifactId>spring-kafka</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-boot-starter</artifactId>
+    <version>3.0.0</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+---
+
+### 2. **Swagger Configuration**
+
+Add a Swagger configuration class to enable API documentation:
+```java
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfo(
+                "Kafka Example API",
+                "API documentation for Kafka Producer and Consumer",
+                "1.0",
+                "Terms of Service",
+                new Contact("Your Name", "www.example.com", "youremail@example.com"),
+                "License",
+                "License URL",
+                Collections.emptyList());
+    }
+}
+```
+
+Swagger UI will be available at `http://localhost:8080/swagger-ui/`.
+
+---
+
+### 3. **Producer Code**
+
+#### Kafka Producer
+Create a service to send messages to the Kafka topic:
+```java
+@Service
+public class KafkaProducer {
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    public void sendMessage(String topic, String message) {
+        kafkaTemplate.send(topic, message);
+    }
+}
+```
+
+#### Producer API Controller
+Expose an endpoint for testing the producer:
+```java
+@RestController
+@RequestMapping("/api/producer")
+public class ProducerController {
+
+    private final KafkaProducer kafkaProducer;
+
+    public ProducerController(KafkaProducer kafkaProducer) {
+        this.kafkaProducer = kafkaProducer;
+    }
+
+    @PostMapping("/send")
+    public ResponseEntity<String> sendMessage(@RequestParam String message) {
+        kafkaProducer.sendMessage("test-topic", message);
+        return ResponseEntity.ok("Message sent to Kafka topic: test-topic");
+    }
+}
+```
+
+---
+
+### 4. **Consumer Code**
+
+#### Kafka Consumer
+Create a service to consume messages from the Kafka topic:
+```java
+@Service
+public class KafkaConsumer {
+
+    @KafkaListener(topics = "test-topic", groupId = "test-group")
+    public void listen(String message) {
+        System.out.println("Received message: " + message);
+    }
+}
+```
+
+#### Consumer Testing in Producer Code
+Modify the producer to simulate a consumer reading the message:
+```java
+@Service
+public class KafkaProducerWithConsumerTest {
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public KafkaProducerWithConsumerTest(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    public void sendAndConsume(String topic, String message) {
+        // Simulate sending a message
+        kafkaTemplate.send(topic, message);
+        System.out.println("Sent message: " + message);
+
+        // Simulate consuming the message (for testing)
+        System.out.println("Simulated Consumer processed: " + message);
+    }
+}
+```
+
+---
+
+### 5. **Producer Testing in Consumer Code**
+
+Simulate sending a response back from the consumer:
+```java
+@Service
+public class KafkaConsumerWithProducerTest {
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public KafkaConsumerWithProducerTest(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    @KafkaListener(topics = "test-topic", groupId = "test-group")
+    public void listenAndProduce(String message) {
+        System.out.println("Received message: " + message);
+
+        // Simulate sending a response back
+        kafkaTemplate.send("response-topic", "Processed: " + message);
+        System.out.println("Sent response: Processed: " + message);
+    }
+}
+```
+
+---
+
+### 6. **Testing Workflow**
+
+1. **Swagger Testing**:
+   - Open Swagger UI at `http://localhost:8080/swagger-ui/`.
+   - Test the **Producer API** by sending messages using the `/api/producer/send` endpoint.
+
+2. **Producer-Consumer Test**:
+   - Verify that the consumer prints the received message.
+   - Check simulated consumer testing in producer code (`sendAndConsume`).
+
+3. **Consumer-Producer Test**:
+   - Verify that the consumer sends a response to `response-topic` using the `listenAndProduce` method.
+
+---
+
