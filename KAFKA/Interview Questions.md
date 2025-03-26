@@ -503,7 +503,7 @@ These configurations ensure proper serialization/deserialization of Kafka messag
     public void group2Consumer(String message) {
         System.out.println("Group2 Consumer: " + message);
     }
-    ```
+```
 
 ---
 
@@ -511,7 +511,7 @@ These configurations ensure proper serialization/deserialization of Kafka messag
 - **KafkaTemplate Usage**:
   - KafkaTemplate is used for producing messages.
   - Example:
-    ```java
+```java
     @Service
     public class KafkaProducer {
 
@@ -525,7 +525,7 @@ These configurations ensure proper serialization/deserialization of Kafka messag
             kafkaTemplate.send(topic, message);
         }
     }
-    ```
+```
 
 ---
 
@@ -537,26 +537,26 @@ These configurations ensure proper serialization/deserialization of Kafka messag
     - Offsets are committed automatically after message processing.
   - **Manual**:
     - Commit offsets programmatically using `Acknowledgment`:
-      ```java
+```java
       @KafkaListener(topics = "my-topic")
       public void listen(String message, Acknowledgment acknowledgment) {
           // Process the message
           acknowledgment.acknowledge();
       }
-      ```
+```
 
 ---
 
 #### **9. What are the benefits of using `ConcurrentKafkaListenerContainerFactory` in Spring Boot?**
 - **Benefits**:
   1. Enables parallel processing by configuring the concurrency level:
-     ```java
+```java
      factory.setConcurrency(3);  // 3 threads
-     ```
+```
   2. Allows batch processing:
-     ```java
+```java
      factory.setBatchListener(true);
-     ```
+```
   3. Supports advanced error handling by adding error handlers.
 
 ---
@@ -571,8 +571,8 @@ These configurations ensure proper serialization/deserialization of Kafka messag
      </dependency>
      ```
   2. Use the `EmbeddedKafka` annotation for an in-memory Kafka broker:
-     ```java
-     @SpringBootTest
+```java
+@SpringBootTest
      @EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
      public class KafkaTest {
          @Autowired
