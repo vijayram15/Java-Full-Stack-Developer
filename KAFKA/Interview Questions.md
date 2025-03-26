@@ -16,6 +16,112 @@ Here’s a comprehensive list of **Apache Kafka interview questions**, categoriz
 9. What are Kafka offsets, and how do they work?
 10. What is the role of ZooKeeper in Kafka?
 
+### **Answers to the Basic Kafka Questions**
+
+---
+
+#### **1. What is Apache Kafka, and what are its primary use cases?**
+- **Apache Kafka** is an open-source distributed event streaming platform for real-time data streaming, message queuing, and log aggregation. It is highly fault-tolerant, scalable, and designed for high-throughput use cases.
+- **Primary Use Cases**:
+  1. **Real-time data pipelines**: Integrating multiple systems for seamless data flow.
+  2. **Log aggregation**: Collecting and storing application logs centrally.
+  3. **Event-driven architectures**: Publishing events like order placements to systems.
+  4. **Streaming analytics**: Processing streams of data for fraud detection or insights.
+  5. **Decoupling services**: Connecting microservices without direct dependencies.
+
+---
+
+#### **2. Explain Kafka’s architecture and key components (topics, partitions, brokers, producers, and consumers).**
+- **Kafka Architecture**:
+  - Kafka is built on a distributed system with the following components:
+    - **Topic**: The category/feed where messages are published.
+    - **Partition**: Each topic is divided into partitions to allow scalability and parallel processing.
+    - **Broker**: A Kafka server that stores partitions and handles requests from clients.
+    - **Producer**: Application or service that sends data (messages) to topics.
+    - **Consumer**: Application or service that reads data (messages) from topics.
+    - **ZooKeeper**: (Legacy versions) Coordinates brokers for leader election and cluster metadata.
+
+---
+
+#### **3. What is a Kafka topic, and how is it different from a queue in traditional messaging systems?**
+- **Kafka Topic**:
+  - A Kafka topic is a category/feed where records are stored.
+  - Topics are immutable; messages can be replayed by consumers.
+- **Difference From Queues**:
+  - In Kafka, a message can be consumed **multiple times** by different consumer groups, while in a queue, a message is removed after being consumed once.
+  - Kafka topics allow **parallel processing** using partitions, whereas queues typically work in sequential order.
+
+---
+
+#### **4. How does Kafka achieve fault tolerance?**
+- **Kafka Fault Tolerance**:
+  - Kafka achieves fault tolerance through **replication**:
+    - Each partition has a leader and multiple replicas across brokers.
+    - Only the leader handles reads/writes; replicas synchronize.
+    - If a leader fails, a follower replica is promoted to leader.
+    - In-Sync Replicas (ISR) track replicas that are fully synchronized with the leader.
+  - Additionally, Kafka uses **acknowledgments** to confirm message durability.
+
+---
+
+#### **5. Explain the difference between Kafka’s at-most-once, at-least-once, and exactly-once delivery semantics.**
+- **Delivery Semantics**:
+  - **At-Most-Once**: Messages may be lost but are never duplicated (no retries).
+  - **At-Least-Once**: Messages are guaranteed delivery but may be duplicated (retry on failure).
+  - **Exactly-Once**: Messages are neither lost nor duplicated. Kafka provides this through **transactional APIs** and **idempotent producers**.
+
+---
+
+#### **6. What is a Kafka broker, and how does it work in a cluster?**
+- **Kafka Broker**:
+  - A broker is a Kafka server that stores partitions and handles client requests (produce/consume messages).
+  - In a cluster:
+    - Brokers coordinate to store topic partitions.
+    - Each partition has one leader broker, with other brokers acting as followers.
+    - Brokers work together for scalability and fault tolerance.
+
+---
+
+#### **7. Define a Kafka partition and its role in scalability.**
+- **Kafka Partition**:
+  - A partition is a subset of a topic that allows parallel processing.
+  - Messages within a partition are ordered, but Kafka does not guarantee order across partitions.
+- **Role in Scalability**:
+  - Partitions enable distributed processing by assigning partitions to different brokers.
+  - Increasing partitions improves throughput and scalability.
+
+---
+
+#### **8. How does Kafka ensure high throughput and durability?**
+- **High Throughput**:
+  - Kafka uses **batched writes** and **compression (e.g., Snappy, GZIP)** to optimize disk and network operations.
+  - Producers and consumers operate asynchronously.
+  - Partitioning allows parallel processing.
+- **Durability**:
+  - Messages are persisted to disk.
+  - Replication ensures durability even if a broker fails.
+
+---
+
+#### **9. What are Kafka offsets, and how do they work?**
+- **Offsets**:
+  - Each message in a Kafka partition has an offset, which is a unique identifier.
+  - Consumers use offsets to track their progress in reading messages.
+  - **How They Work**:
+    - Kafka stores offsets for each consumer group.
+    - Consumers can replay messages by resetting their offsets.
+
+---
+
+#### **10. What is the role of ZooKeeper in Kafka?**
+- **ZooKeeper**:
+  - (Legacy) ZooKeeper manages metadata for Kafka brokers:
+    - Keeps track of broker information.
+    - Coordinates leader elections for partitions.
+    - Maintains the state of Kafka topics, partitions, and replicas.
+  - **Replacement**:
+    - Kafka is gradually replacing ZooKeeper with **Kafka Raft (KRaft)** for metadata management, removing ZooKeeper dependency.
+
 ---
 
 ### **Intermediate Kafka Questions**
