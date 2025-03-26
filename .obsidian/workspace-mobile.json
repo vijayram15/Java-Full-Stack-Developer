@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java/Interview Questions/JDK differences.md",
+                "file": "KAFKA/Kafka.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JDK differences"
+              "title": "Kafka"
             }
           }
         ]
@@ -156,8 +156,10 @@
   },
   "active": "7d8a0d6472362df2",
   "lastOpenFiles": [
-    "React JS/Micro Frontend.md",
     "Java/Interview Questions/JDK differences.md",
+    "KAFKA/Kafka.md",
+    "KAFKA",
+    "React JS/Micro Frontend.md",
     "React JS/Interview Questions/Interview Questions.md",
     "Java/2. Data Types & Variables.md",
     "React JS/Interview Questions",
