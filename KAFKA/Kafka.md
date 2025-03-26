@@ -258,3 +258,143 @@ Here are some common challenges faced during Kafka configuration, along with exa
 - **Solution**: Use ZooKeeper ensembles with multiple nodes and enable leader election for fault tolerance.
 
 ---
+
+**Multiple Kafka consumers**, their configuration, and examples. Multiple consumers allow parallel processing of messages from a topic, which is essential for scalability and performance in distributed systems. I'll cover key concepts, configurations, and provide Spring Boot-based code snippets.
+
+---
+
+### 1. **Understanding Multiple Kafka Consumers**
+- **Consumer Groups**: Kafka uses consumer groups to allow multiple consumers to divide up message processing across partitions. Each partition is assigned to only one consumer within a group, ensuring no duplication.
+- **Parallel Processing**: With multiple consumers in a group, messages in a topic are processed in parallel.
+
+---
+
+### 2. **Configuration for Multiple Consumers**
+
+#### **Key Configurations for Consumer Groups**
+Here are the configurations you need to enable multiple Kafka consumers:
+
+```properties
+# Consumer group identifier (same group for all consumers in a group)
+spring.kafka.consumer.group-id=my-consumer-group
+
+# Kafka broker address
+spring.kafka.bootstrap-servers=localhost:9092
+
+# Deserializer classes for key and value
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
+# Auto offset reset behavior
+spring.kafka.consumer.auto-offset-reset=earliest
+```
+
+If you're using multiple consumer instances, they should all share the same group ID to form a consumer group.
+
+---
+
+### 3. **Code Example: Multiple Kafka Consumers in Spring Boot**
+
+#### **Consumer A**
+```java
+@Service
+public class KafkaConsumerA {
+
+    @KafkaListener(topics = "my-topic", groupId = "my-consumer-group")
+    public void listenA(String message) {
+        System.out.println("Consumer A received: " + message);
+    }
+}
+```
+
+#### **Consumer B**
+```java
+@Service
+public class KafkaConsumerB {
+
+    @KafkaListener(topics = "my-topic", groupId = "my-consumer-group")
+    public void listenB(String message) {
+        System.out.println("Consumer B received: " + message);
+    }
+}
+```
+
+When multiple consumers belong to the same group (e.g., `my-consumer-group`), Kafka distributes the partitions among them. For example, if the topic has 4 partitions and 2 consumers, each consumer processes 2 partitions.
+
+---
+
+### 4. **Handling Partition Assignment**
+You can define custom logic for partition assignment by implementing `ConsumerRebalanceListener`:
+```java
+@Service
+public class KafkaConsumerWithRebalanceListener {
+
+    @KafkaListener(topics = "my-topic", groupId = "my-consumer-group")
+    public void listenWithRebalanceListener(String message) {
+        System.out.println("Message received: " + message);
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.getContainerProperties().setConsumerRebalanceListener(new ConsumerRebalanceListener() {
+            @Override
+            public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+                System.out.println("Partitions revoked: " + partitions);
+            }
+
+            @Override
+            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+                System.out.println("Partitions assigned: " + partitions);
+            }
+        });
+        return factory;
+    }
+}
+```
+
+---
+
+### 5. **Real-World Example: E-commerce Application**
+Imagine you’re building an e-commerce system where multiple consumers handle different types of events:
+- **OrderConsumer** processes orders (topic: `order-topic`).
+- **PaymentConsumer** processes payments (topic: `payment-topic`).
+
+Here’s how you set it up:
+
+#### **Order Consumer**
+```java
+@Service
+public class OrderConsumer {
+
+    @KafkaListener(topics = "order-topic", groupId = "order-group")
+    public void processOrder(String order) {
+        System.out.println("Processing order: " + order);
+    }
+}
+```
+
+#### **Payment Consumer**
+```java
+@Service
+public class PaymentConsumer {
+
+    @KafkaListener(topics = "payment-topic", groupId = "payment-group")
+    public void processPayment(String payment) {
+        System.out.println("Processing payment: " + payment);
+    }
+}
+```
+
+---
+
+### 6. **Scaling Multiple Consumers**
+- **Horizontal Scaling**: Add more consumer instances to the group to process messages in parallel.
+- **Partition Configuration**: Increase the number of partitions in the topic to ensure effective distribution of messages across consumers.
+
+#### Example:
+If you have a topic with 6 partitions:
+- **3 Consumers in the same group**: Each consumer processes 2 partitions.
+- **Adding a 4th Consumer**: Some consumers will handle multiple partitions, as partitions > consumers.
+
+---
