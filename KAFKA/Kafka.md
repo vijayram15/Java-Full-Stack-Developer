@@ -259,7 +259,7 @@ Here are some common challenges faced during Kafka configuration, along with exa
 
 ---
 
-**Multiple Kafka consumers**, their configuration, and examples. Multiple consumers allow parallel processing of messages from a topic, which is essential for scalability and performance in distributed systems. I'll cover key concepts, configurations, and provide Spring Boot-based code snippets.
+**Multiple Kafka consumers**, their configuration, and examples. Multiple consumers allow parallel processing of messages from a topic, which is essential for scalability and performance in distributed systems. It'll cover key concepts, configurations, and provide Spring Boot-based code snippets.
 
 ---
 
@@ -398,3 +398,126 @@ If you have a topic with 6 partitions:
 - **Adding a 4th Consumer**: Some consumers will handle multiple partitions, as partitions > consumers.
 
 ---
+
+If you want to share the **same message** with multiple consumers or subscribers, you can use Kafka's **publish-subscribe** model effectively. In Kafka, a topic can have multiple consumer groups, and each group acts as a separate set of subscribers. Here’s how it works and how you can implement it:
+
+---
+
+### 1. **How Publish-Subscribe Works in Kafka**
+- **Multiple Consumer Groups**: Kafka allows you to create multiple consumer groups for a single topic. Each group receives a copy of the messages from the topic.
+- **Use Case**: Imagine a notification system where you want to send the same event (e.g., "Order Placed") to:
+  - Logging service (Consumer Group A)
+  - Analytics service (Consumer Group B)
+  - Notification service (Consumer Group C)
+
+In this scenario, each consumer group processes its own copy of the message independently.
+
+---
+
+### 2. **Configuration for Multiple Consumer Groups**
+Define separate group IDs in your `application.properties` for each consumer group:
+```properties
+# Consumer Group A
+spring.kafka.consumer.group-id=consumer-group-a
+
+# Consumer Group B
+spring.kafka.consumer.group-id=consumer-group-b
+
+# Consumer Group C
+spring.kafka.consumer.group-id=consumer-group-c
+
+spring.kafka.bootstrap-servers=localhost:9092
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.auto-offset-reset=earliest
+```
+
+---
+
+### 3. **Code Example for Sharing Messages**
+
+#### **Producer Service**
+The producer sends messages to a topic:
+```java
+@Service
+public class KafkaProducer {
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    public void sendMessage(String topic, String message) {
+        kafkaTemplate.send(topic, message);
+    }
+}
+```
+
+#### **Multiple Consumers**
+
+##### **Consumer for Logging Service**
+```java
+@Service
+public class LoggingConsumer {
+
+    @KafkaListener(topics = "shared-topic", groupId = "consumer-group-a")
+    public void listenLogging(String message) {
+        System.out.println("Logging Consumer received: " + message);
+    }
+}
+```
+
+##### **Consumer for Analytics Service**
+```java
+@Service
+public class AnalyticsConsumer {
+
+    @KafkaListener(topics = "shared-topic", groupId = "consumer-group-b")
+    public void listenAnalytics(String message) {
+        System.out.println("Analytics Consumer received: " + message);
+    }
+}
+```
+
+##### **Consumer for Notification Service**
+```java
+@Service
+public class NotificationConsumer {
+
+    @KafkaListener(topics = "shared-topic", groupId = "consumer-group-c")
+    public void listenNotification(String message) {
+        System.out.println("Notification Consumer received: " + message);
+    }
+}
+```
+
+In this setup:
+- The producer sends a message to `shared-topic`.
+- Each consumer group (`consumer-group-a`, `consumer-group-b`, `consumer-group-c`) independently consumes the message.
+
+---
+
+### 4. **Real-World Use Case Example**
+Imagine you’re running a **multi-service application**:
+- When a user places an order:
+  - **Consumer Group A (Logging)** stores the event in application logs.
+  - **Consumer Group B (Analytics)** updates statistical dashboards.
+  - **Consumer Group C (Notification)** sends an email or SMS notification to the user.
+
+Each service operates independently because they belong to separate consumer groups.
+
+---
+
+### 5. **Scaling and Best Practices**
+#### Scaling:
+- Add more partitions to the topic if the consumer workload increases.
+- Add more consumers within the same group to handle high-throughput data.
+
+#### Best Practices:
+- Ensure group IDs are unique for truly independent consumption of messages.
+- Use monitoring tools like Kafka Manager to track consumer group performance.
+- Avoid excessive consumer creation; use logical grouping based on service requirements.
+
+---
+
