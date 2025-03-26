@@ -584,8 +584,6 @@ These configurations ensure proper serialization/deserialization of Kafka messag
              // Add assertions here
          }
      }
-     ```
+```
 
 ---
-
-Let me know if you’d like more detailed explanations or any additional examples![43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/promisingccy/eskafkademo/tree/4865023589a35dd1a365065c0f0765e52b350043/src%2Fmain%2Fjava%2Fcom%2Ftophant%2Feskafkademo%2Fcommon%2Fkafka%2FKafkaProducer.java?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1")
