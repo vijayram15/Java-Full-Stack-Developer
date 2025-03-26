@@ -1,7 +1,3 @@
----
-share: true
----
-
 Here are **scenario-based multithreading questions**, designed to challenge your understanding of practical applications. These scenarios simulate real-world problems and require creative solutions using Java's multithreading tools.
 
 ---

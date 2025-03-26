@@ -1,7 +1,3 @@
----
-share: true
----
-
 Got it! I'll now focus solely on **interview questions** about the **Collections Framework**, making the answers detailed and understandable. Let's dive into tricky questions with **elaborative explanations** that clarify not only the "what" but also the "why" and "how."
 
 ---

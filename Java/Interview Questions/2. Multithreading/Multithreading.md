@@ -1,7 +1,3 @@
----
-share: true
----
-
 Let’s shift our focus to **Multithreading** in Java, one of the most challenging and rewarding topics in software development. I'll cover advanced concepts, practical insights, and tricky interview questions to prepare you thoroughly.
 
 ---

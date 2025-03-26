@@ -1,7 +1,3 @@
----
-share: true
----
-
 ### **Spring JPA (Java Persistence API)**
 
 Spring JPA, built on top of Java Persistence API (JPA), is part of the Spring Data framework. It simplifies database operations by abstracting away boilerplate code for interacting with relational databases. With Spring JPA, you can define repository interfaces and achieve CRUD and complex database operations seamlessly.

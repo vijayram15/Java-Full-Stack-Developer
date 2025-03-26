@@ -1,7 +1,3 @@
----
-share: true
----
-
 Java 8, Spring JPA, SQL, and a few other topics are vital pillars for any full-stack Java developer's journey. Let me break down these areas and highlight their relevance.
 
 ---

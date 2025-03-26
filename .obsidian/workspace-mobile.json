@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java/15. Networking.md",
+                "file": "React JS/13. Deployment.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "15. Networking"
+              "title": "13. Deployment"
             }
           }
         ]
@@ -98,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "KAFKA/Kafka.md",
+            "file": "React JS/13. Deployment.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -156,36 +156,36 @@
   },
   "active": "7d8a0d6472362df2",
   "lastOpenFiles": [
-    "Java/14. Serialization & Deserialization.md",
-    "Java/13. JVM Architecture.md",
-    "Java/12. Reflection API.md",
-    "Java/11. Annotations.md",
-    "Java/9. Inner classes.md",
-    "Java/8. Generics.md",
-    "Java/7. Multithreading.md",
-    "Java/6. JAVA IO.md",
-    "Java/5. Exception Handling.md",
-    "Java/4. Collections Framework.md",
-    "Java/3. Control flow statements.md",
-    "Java/2. Data Types & Variables.md",
-    "Java/10. Java 8 Features.md",
-    "Java/1. OOPs.md",
-    "KAFKA/Kafka.md",
-    "KAFKA/Interview Questions.md",
-    "Java/Interview Questions/JDK differences.md",
-    "KAFKA",
     "React JS/Micro Frontend.md",
+    "React JS/13. Deployment.md",
+    "React JS/12. React with Type script.md",
+    "React JS/11. Testing.md",
+    "React JS/10. Styling.md",
+    "React JS/9. Performance Optimization.md",
+    "React JS/8. Routing.md",
+    "React JS/7. Components Communication.md",
+    "React JS/6. State Management.md",
+    "React JS/5. Life Cycle Methods and Hooks.md",
+    "React JS/4. Props vs State.md",
+    "React JS/3. JSX.md",
+    "React JS/2. Functional vs Class-based.md",
+    "React JS/1. Topics.md",
     "React JS/Interview Questions/Interview Questions.md",
+    "Spark.md",
+    "Knowledge.md",
+    "Docker.md",
+    "Additional.md",
+    "0. Topics And Key Areas.md",
+    "Spring/Spring JPA/JPA.md",
+    "Spring/Spring Boot/8. Testing.md",
+    "Spring/Spring Boot/7. Actuator & Monitoring.md",
+    "Spring/Spring Boot/6. Configuration Management.md",
+    "Spring/Spring Boot/5. Spring boot with KAFKA.md",
+    "Spring/Spring Boot/4. Data Access.md",
+    "KAFKA",
     "React JS/Interview Questions",
-    "Java/Interview Questions/2. SerialVersionUID.md",
-    "/Java/Interview Questions/2. SerialVersionUID.md",
-    "/Java/Interview Questions/1. Collections/Comparable Vs Comparator.md",
-    "Java/Interview Questions/1. Collections/Comparable Vs Comparator.md",
     "/Java/Interview Questions/1. Collections",
     "/Java/Interview Questions",
-    "/Java/4. Collections Framework.md",
-    "/Java/3. Control flow statements.md",
-    "/Java/2. Data Types & Variables.md",
     "/Java"
   ]
 }
