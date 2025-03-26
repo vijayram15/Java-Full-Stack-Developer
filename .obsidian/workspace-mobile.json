@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "React JS/13. Deployment.md",
+                "file": "ReadMe.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "13. Deployment"
+              "title": "ReadMe"
             }
           }
         ]
@@ -150,14 +150,16 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "workspaces:Manage workspace layouts": false
+      "workspaces:Manage workspace layouts": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "7d8a0d6472362df2",
   "lastOpenFiles": [
-    "React JS/Micro Frontend.md",
+    "Spark.md",
+    "Java/0. Java Topics.md",
     "React JS/13. Deployment.md",
+    "React JS/Micro Frontend.md",
     "React JS/12. React with Type script.md",
     "React JS/11. Testing.md",
     "React JS/10. Styling.md",
@@ -171,7 +173,6 @@
     "React JS/2. Functional vs Class-based.md",
     "React JS/1. Topics.md",
     "React JS/Interview Questions/Interview Questions.md",
-    "Spark.md",
     "Knowledge.md",
     "Docker.md",
     "Additional.md",
@@ -181,7 +182,6 @@
     "Spring/Spring Boot/7. Actuator & Monitoring.md",
     "Spring/Spring Boot/6. Configuration Management.md",
     "Spring/Spring Boot/5. Spring boot with KAFKA.md",
-    "Spring/Spring Boot/4. Data Access.md",
     "KAFKA",
     "React JS/Interview Questions",
     "/Java/Interview Questions/1. Collections",

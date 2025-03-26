@@ -1,5 +1,5 @@
 {
-  "commitMessage": "Vijay-For Java FS Developer: {{date}}",
+  "commitMessage": "Harith-For Java FS Developer: {{date}}",
   "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
   "autoSaveInterval": 1,
   "autoPushInterval": 0,
@@ -55,5 +55,5 @@
     "lastShownAuthorDisplay": "initials",
     "lastShownDateTimeFormatOptions": "date"
   },
-  "autoCommitMessage": "Vijay-For Java FS Developer: {{date}}"
+  "autoCommitMessage": "Harith-For Java FS Developer: {{date}}"
 }
