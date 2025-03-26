@@ -1,4 +1,3 @@
-
 ### **1. Docker Basics**
    - Core Concepts: Containers vs. virtual machines, Docker architecture.
    - Advantages: Portability, resource efficiency, scalability.

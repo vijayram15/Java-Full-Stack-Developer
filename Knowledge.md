@@ -1,4 +1,3 @@
- 
 ### 1. **Deepen Your Knowledge**
    - **Microservices Architecture**:
      - Understand the principles like independent deployments, bounded context, and resilience.
