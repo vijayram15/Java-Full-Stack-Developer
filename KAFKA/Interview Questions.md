@@ -488,12 +488,12 @@ These configurations ensure proper serialization/deserialization of Kafka messag
 #### **6. How do you configure multiple consumer groups in a Spring Kafka application?**
 - **Answer**:
   - Configure different consumer groups by using distinct `group-id` values:
-    ```properties
+```properties
     spring.kafka.consumer.group-id=consumer-group-1
     spring.kafka.consumer.group-id=consumer-group-2
-    ```
+```
   - Example:
-    ```java
+```java
     @KafkaListener(topics = "topic1", groupId = "group1")
     public void group1Consumer(String message) {
         System.out.println("Group1 Consumer: " + message);
