@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ReadMe.md",
+                "file": "Spark.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ReadMe"
+              "title": "Spark"
             }
           }
         ]
@@ -98,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "React JS/13. Deployment.md",
+            "file": "Spark.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -156,6 +156,7 @@
   },
   "active": "7d8a0d6472362df2",
   "lastOpenFiles": [
+    "ReadMe.md",
     "Spark.md",
     "Java/0. Java Topics.md",
     "React JS/13. Deployment.md",
@@ -181,7 +182,6 @@
     "Spring/Spring Boot/8. Testing.md",
     "Spring/Spring Boot/7. Actuator & Monitoring.md",
     "Spring/Spring Boot/6. Configuration Management.md",
-    "Spring/Spring Boot/5. Spring boot with KAFKA.md",
     "KAFKA",
     "React JS/Interview Questions",
     "/Java/Interview Questions/1. Collections",
