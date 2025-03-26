@@ -137,6 +137,120 @@ Here’s a comprehensive list of **Apache Kafka interview questions**, categoriz
 10. Describe Kafka’s high-level APIs, such as Kafka Streams and Kafka Connect.
 
 ---
+### **Answers to Intermediate Kafka Questions**
+
+---
+
+#### **1. What is a consumer group, and why is it used in Kafka?**
+- **Consumer Group**:
+  - A group of consumers that collaborate to consume data from a Kafka topic, where each partition is assigned to one consumer in the group.
+  - Consumers in different groups can independently read the same messages, enabling parallel processing.
+- **Why is it used**:
+  - **Scalability**: Multiple consumers can process partitions in parallel for high-throughput.
+  - **Fault Tolerance**: If a consumer fails, its partitions are reassigned to other consumers in the group.
+  - Example: In a payment system, multiple consumers in a group handle transactions, ensuring scalability and redundancy.
+
+---
+
+#### **2. How does Kafka ensure data consistency in distributed clusters?**
+- **Answer**:
+  - **Replication**: Kafka replicates partitions across brokers. Each partition has one leader replica and multiple follower replicas, ensuring data is consistent.
+  - **Acknowledgments (Acks)**:
+    - Producers can configure acknowledgments (`acks`): 
+      - `acks=all` ensures the message is written to all in-sync replicas before it is acknowledged.
+  - **ZooKeeper/KRaft**: Coordinates brokers to maintain consistent metadata (e.g., partition leadership).
+
+---
+
+#### **3. Explain the replication mechanism in Kafka. What are in-sync replicas (ISR)?**
+- **Replication Mechanism**:
+  - Kafka replicates data across brokers to provide fault tolerance.
+  - A partition's leader handles all reads/writes, while followers replicate the leader's data.
+  - If the leader fails, a follower is promoted as the new leader.
+- **In-Sync Replicas (ISR)**:
+  - ISR is the set of replicas that are fully synchronized with the leader.
+  - Kafka ensures durability by committing messages only if they are replicated to all ISR.
+
+---
+
+#### **4. How do producers and consumers work together in Kafka?**
+- **Answer**:
+  - **Producers** send records to Kafka topics. They can specify partitions explicitly or let Kafka assign partitions automatically using the record key.
+  - **Consumers** read records from the topics, track progress using offsets, and process data.
+  - Kafka decouples producers and consumers:
+    - Producers can publish data independently of consumers.
+    - Consumers can read data at their own pace.
+
+---
+
+#### **5. Describe Kafka’s message retention policy. How can it be configured?**
+- **Message Retention**:
+  - Kafka retains messages in topics based on time or size.
+  - **Retention by Time**:
+    - Configured using `retention.ms`. For example, to retain messages for 7 days:
+      ```bash
+      bin/kafka-topics.sh --alter --topic my-topic --config retention.ms=604800000
+      ```
+  - **Retention by Size**:
+    - Configured using `retention.bytes`. For example, to retain up to 1GB of messages:
+      ```bash
+      bin/kafka-topics.sh --alter --topic my-topic --config retention.bytes=1073741824
+      ```
+
+---
+
+#### **6. How does Kafka handle backpressure in high-throughput systems?**
+- **Answer**:
+  - Kafka handles backpressure by allowing producers and consumers to manage flow:
+    - **Producers**: Use batching (`linger.ms` and `batch.size`) to send messages in bulk.
+    - **Consumers**: Optimize poll interval (`fetch.min.bytes` and `max.poll.records`) for efficient message processing.
+  - **Partitioning**: Distribute messages across partitions for parallel consumption.
+
+---
+
+#### **7. What is Kafka’s log compaction feature, and how is it useful?**
+- **Answer**:
+  - Log compaction retains only the latest record for a given key, discarding older records with the same key.
+  - **Use Case**:
+    - Maintaining the current state of an entity (e.g., user profile updates).
+  - Enable log compaction for a topic:
+    ```bash
+    bin/kafka-topics.sh --create --topic compacted-topic --config cleanup.policy=compact
+    ```
+
+---
+
+#### **8. Explain Kafka’s partitioning mechanism and the role of keys in data distribution.**
+- **Partitioning**:
+  - A topic is divided into partitions for parallelism.
+  - Producers use keys to determine which partition a record is sent to:
+    ```java
+    partition = hash(key) % numPartitions;
+    ```
+- **Role of Keys**:
+  - Ensures related records (e.g., all data for a user ID) are sent to the same partition.
+  - Guarantees ordering within a partition for the same key.
+
+---
+
+#### **9. What are Kafka’s internal topics, such as `__consumer_offsets`?**
+- **Answer**:
+  - Kafka uses internal topics for system operations:
+    - `__consumer_offsets`: Stores consumer group offsets for tracking progress.
+    - `__transaction_state`: Manages transactional data for exactly-once semantics.
+    - `__cluster_metadata`: Holds metadata for the Kafka cluster.
+
+---
+
+#### **10. Describe Kafka’s high-level APIs, such as Kafka Streams and Kafka Connect.**
+- **Kafka Streams**:
+  - A lightweight library for real-time stream processing directly on Kafka data.
+  - Example Use Case: Aggregating sales data across regions.
+- **Kafka Connect**:
+  - A tool for integrating Kafka with external systems (e.g., databases, S3).
+  - Example Use Case: Exporting data from Kafka to Elasticsearch.
+
+---
 
 ### **Advanced Kafka Questions**
 1. How would you optimize Kafka for high-throughput systems?
