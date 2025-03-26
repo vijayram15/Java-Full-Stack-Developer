@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "KAFKA/Kafka.md",
+                "file": "Java/15. Networking.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Kafka"
+              "title": "15. Networking"
             }
           }
         ]
@@ -156,13 +156,26 @@
   },
   "active": "7d8a0d6472362df2",
   "lastOpenFiles": [
-    "KAFKA/Interview Questions.md",
+    "Java/14. Serialization & Deserialization.md",
+    "Java/13. JVM Architecture.md",
+    "Java/12. Reflection API.md",
+    "Java/11. Annotations.md",
+    "Java/9. Inner classes.md",
+    "Java/8. Generics.md",
+    "Java/7. Multithreading.md",
+    "Java/6. JAVA IO.md",
+    "Java/5. Exception Handling.md",
+    "Java/4. Collections Framework.md",
+    "Java/3. Control flow statements.md",
+    "Java/2. Data Types & Variables.md",
+    "Java/10. Java 8 Features.md",
+    "Java/1. OOPs.md",
     "KAFKA/Kafka.md",
+    "KAFKA/Interview Questions.md",
     "Java/Interview Questions/JDK differences.md",
     "KAFKA",
     "React JS/Micro Frontend.md",
     "React JS/Interview Questions/Interview Questions.md",
-    "Java/2. Data Types & Variables.md",
     "React JS/Interview Questions",
     "Java/Interview Questions/2. SerialVersionUID.md",
     "/Java/Interview Questions/2. SerialVersionUID.md",
@@ -173,11 +186,6 @@
     "/Java/4. Collections Framework.md",
     "/Java/3. Control flow statements.md",
     "/Java/2. Data Types & Variables.md",
-    "/Java",
-    "Java/1. OOPs.md",
-    "Java/0. Java Topics.md",
-    "AWS/0. AWS Topics.md",
-    "Knowledge.md",
-    "/Knowledge.md"
+    "/Java"
   ]
 }
