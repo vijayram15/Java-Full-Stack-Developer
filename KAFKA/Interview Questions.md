@@ -265,20 +265,6 @@ Here’s a comprehensive list of **Apache Kafka interview questions**, categoriz
 10. What tools can you use for Kafka monitoring and debugging?
 
 ---
-
-### **Kafka and Spring Boot Questions**
-1. How do you integrate Kafka with a Spring Boot application?
-2. What are the key configurations for Kafka producers and consumers in Spring Boot?
-3. How would you implement retry and error handling in a Spring Kafka application?
-4. How does `@KafkaListener` work in Spring Boot?
-5. Explain how to process Kafka messages in batch mode with Spring Boot.
-6. How do you configure multiple consumer groups in a Spring Kafka application?
-7. How would you use KafkaTemplate to send messages in Spring Boot?
-8. How does Spring Kafka handle offset management?
-9. What are the benefits of using `ConcurrentKafkaListenerContainerFactory` in Spring Boot?
-10. How would you implement end-to-end testing for a Kafka-based Spring Boot application?
-
----
 ### **Answers to Advanced Kafka Questions**
 
 ---
@@ -390,70 +376,14 @@ Here’s a comprehensive list of **Apache Kafka interview questions**, categoriz
 
 ---
 
-### **Answers to Kafka and Spring Boot Questions**
-
-#### **1. How do you integrate Kafka with a Spring Boot application?**
-- **Steps**:
-  1. Add Kafka dependencies to `pom.xml`:
-     ```xml
-     <dependency>
-         <groupId>org.springframework.kafka</groupId>
-         <artifactId>spring-kafka</artifactId>
-     </dependency>
-     ```
-  2. Configure Kafka properties in `application.properties`:
-     ```properties
-     spring.kafka.bootstrap-servers=localhost:9092
-     spring.kafka.consumer.group-id=my-group
-     ```
-  3. Use `KafkaTemplate` for producing messages and `@KafkaListener` for consuming them.
-
----
-
-#### **2. What are the key configurations for Kafka producers and consumers in Spring Boot?**
-- **Producers**:
-  - `spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer`
-  - `spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer`
-- **Consumers**:
-  - `spring.kafka.consumer.auto-offset-reset=earliest`
-  - `spring.kafka.consumer.enable-auto-commit=false`
-
----
-
-#### **3. How would you implement retry and error handling in a Spring Kafka application?**
-- **Retry**:
-  - Use `DefaultErrorHandler` for retries:
-    ```java
-    @Bean
-    public DefaultKafkaConsumerFactory<?, ?> kafkaListenerContainerFactory() {
-        return new DefaultKafkaConsumerFactory<>();
-    }
-    ```
-- **Error Handling**:
-  - Customize error recovery with `SeekToCurrentErrorHandler`.
-
----
-
-Let me know if you’d like answers to other questions in detail! We can continue from **Kafka and Spring Boot** topics or explore anything specific further!
-### **Scenario-Based Questions**
-1. If a producer sends messages faster than consumers can process them, how would you handle this scenario?
-2. You notice uneven load distribution across Kafka partitions. What steps would you take to resolve this?
-3. A consumer group is experiencing lag. How would you identify the root cause and fix it?
-4. Describe how you would implement a real-time analytics pipeline using Kafka.
-5. What would you do if a Kafka broker fails in a production environment?
-6. How would you scale Kafka consumers to handle increased message volume?
-7. Design a system where multiple services need to consume the same Kafka topic independently.
-8. How would you handle schema changes in a Kafka topic without breaking existing consumers?
-9. Describe how you would secure Kafka communication in a production setup.
-10. How would you set up Kafka in a cloud-native architecture?
-
----
-
-### **Behavioral Questions**
-1. Describe a challenging Kafka issue you faced in a project and how you resolved it.
-2. How do you ensure Kafka’s reliability and performance in a production environment?
-3. What best practices do you follow when working with Kafka?
-4. Have you ever optimized a Kafka setup for a specific use case? If so, how?
-
----
-
+### **Kafka and Spring Boot Questions**
+1. How do you integrate Kafka with a Spring Boot application?
+2. What are the key configurations for Kafka producers and consumers in Spring Boot?
+3. How would you implement retry and error handling in a Spring Kafka application?
+4. How does `@KafkaListener` work in Spring Boot?
+5. Explain how to process Kafka messages in batch mode with Spring Boot.
+6. How do you configure multiple consumer groups in a Spring Kafka application?
+7. How would you use KafkaTemplate to send messages in Spring Boot?
+8. How does Spring Kafka handle offset management?
+9. What are the benefits of using `ConcurrentKafkaListenerContainerFactory` in Spring Boot?
+10. How would you implement end-to-end testing for a Kafka-based Spring Boot application?
