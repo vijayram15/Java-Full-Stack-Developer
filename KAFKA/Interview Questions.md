@@ -279,7 +279,162 @@ Here’s a comprehensive list of **Apache Kafka interview questions**, categoriz
 10. How would you implement end-to-end testing for a Kafka-based Spring Boot application?
 
 ---
+### **Answers to Advanced Kafka Questions**
 
+---
+
+#### **1. How would you optimize Kafka for high-throughput systems?**
+- **Producer Optimizations**:
+  - Use **batching**:
+    - Increase `batch.size` for fewer network requests.
+    - Set `linger.ms` to delay sending until the batch is full.
+  - Use **compression** (e.g., Snappy, GZIP) to reduce message size.
+  - Set `acks=1` or `acks=all` to balance durability and throughput.
+- **Broker Optimizations**:
+  - Tune `num.io.threads` and `log.segment.bytes` to handle concurrent operations.
+  - Use SSDs for faster disk writes.
+- **Consumer Optimizations**:
+  - Increase `fetch.min.bytes` for batch processing.
+  - Use `max.poll.records` to process multiple messages at once.
+
+---
+
+#### **2. What are custom partitioners, and when would you use them in Kafka?**
+- **Custom Partitioner**:
+  - A custom logic that determines how messages are assigned to partitions based on the message key.
+- **When to Use**:
+  - When the default partitioning logic (e.g., hash-based) does not meet application needs.
+  - Example: Assign specific customers to dedicated partitions for maintaining regional segregation.
+
+---
+
+#### **3. How do you manage schema evolution in Kafka (e.g., using Schema Registry)?**
+- **Schema Evolution**:
+  - Kafka producers and consumers use Avro, Protobuf, or JSON schemas.
+  - **Confluent Schema Registry** ensures compatibility:
+    - **Backward Compatibility**: New schemas must be compatible with older ones.
+    - **Forward Compatibility**: Older consumers can process messages with new fields.
+  - Example: Adding optional fields without breaking existing consumers.
+
+---
+
+#### **4. Explain how you would set up Kafka in a highly available architecture.**
+- **Highly Available Kafka**:
+  - Deploy Kafka brokers across multiple **availability zones**.
+  - Use a replication factor (e.g., 3) to replicate partitions across brokers.
+  - Configure ZooKeeper or KRaft clusters with an odd number of nodes (e.g., 3 or 5).
+  - Ensure proper load balancing and monitoring for failover scenarios.
+
+---
+
+#### **5. What are the challenges of having a large number of partitions in a topic?**
+- **Challenges**:
+  - Increased overhead for metadata management in ZooKeeper/KRaft.
+  - Longer recovery times during broker failures.
+  - Higher memory usage in producers and consumers for maintaining partition data.
+- **Solutions**:
+  - Balance the number of partitions with the number of brokers.
+  - Monitor partition size and usage.
+
+---
+
+#### **6. How does Kafka handle leader elections in case of broker failure?**
+- **Leader Election**:
+  - If a broker hosting a partition leader fails, ZooKeeper/KRaft elects a new leader from the ISR.
+  - Consumers and producers are notified of the new leader.
+- **Configuration**:
+  - Adjust `min.insync.replicas` to ensure at least one in-sync replica is available for leader election.
+
+---
+
+#### **7. What are transaction APIs in Kafka, and how do they enable exactly-once semantics?**
+- **Transaction APIs**:
+  - Allow producers to write messages to multiple topics atomically.
+  - Ensure that either all messages are committed or none are, avoiding partial writes.
+- **Enable Exactly-Once Semantics**:
+  - Use idempotent producers (`enable.idempotence=true`) to avoid duplication.
+  - Example: Transferring money between accounts requires that all changes are logged without duplication.
+
+---
+
+#### **8. How would you debug consumer lag in Kafka?**
+- **Steps to Debug**:
+  1. Monitor consumer lag using Kafka Manager, Prometheus, or Grafana.
+  2. Check partition assignment: Ensure all partitions are assigned.
+  3. Investigate offset commit delays or failures.
+  4. Optimize poll and processing configurations:
+     - Use `max.poll.records` to process more messages.
+     - Increase `session.timeout.ms` to prevent consumer timeouts.
+- **Real-World Example**:
+  - A consumer processing IoT data lags due to high processing time. Increase batch processing size to catch up.
+
+---
+
+#### **9. Explain how Kafka achieves stream processing with the Kafka Streams API.**
+- **Kafka Streams**:
+  - A lightweight library for processing real-time streams of events.
+  - Features:
+    - Supports **stateful** and **stateless** operations.
+    - Integrates seamlessly with Kafka topics for source and sink.
+  - **Example Use Case**:
+    - Aggregating sales data per product category and publishing results to an analytics topic.
+
+---
+
+#### **10. What tools can you use for Kafka monitoring and debugging?**
+- **Popular Tools**:
+  - **Kafka Manager**: Tracks broker, topic, and partition metrics.
+  - **Prometheus/Grafana**: Provides detailed dashboards for monitoring Kafka health and throughput.
+  - **Confluent Control Center**: Monitors cluster performance and consumer lags.
+  - **Burrow**: A tool specifically for monitoring consumer lags.
+
+---
+
+### **Answers to Kafka and Spring Boot Questions**
+
+#### **1. How do you integrate Kafka with a Spring Boot application?**
+- **Steps**:
+  1. Add Kafka dependencies to `pom.xml`:
+     ```xml
+     <dependency>
+         <groupId>org.springframework.kafka</groupId>
+         <artifactId>spring-kafka</artifactId>
+     </dependency>
+     ```
+  2. Configure Kafka properties in `application.properties`:
+     ```properties
+     spring.kafka.bootstrap-servers=localhost:9092
+     spring.kafka.consumer.group-id=my-group
+     ```
+  3. Use `KafkaTemplate` for producing messages and `@KafkaListener` for consuming them.
+
+---
+
+#### **2. What are the key configurations for Kafka producers and consumers in Spring Boot?**
+- **Producers**:
+  - `spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer`
+  - `spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer`
+- **Consumers**:
+  - `spring.kafka.consumer.auto-offset-reset=earliest`
+  - `spring.kafka.consumer.enable-auto-commit=false`
+
+---
+
+#### **3. How would you implement retry and error handling in a Spring Kafka application?**
+- **Retry**:
+  - Use `DefaultErrorHandler` for retries:
+    ```java
+    @Bean
+    public DefaultKafkaConsumerFactory<?, ?> kafkaListenerContainerFactory() {
+        return new DefaultKafkaConsumerFactory<>();
+    }
+    ```
+- **Error Handling**:
+  - Customize error recovery with `SeekToCurrentErrorHandler`.
+
+---
+
+Let me know if you’d like answers to other questions in detail! We can continue from **Kafka and Spring Boot** topics or explore anything specific further!
 ### **Scenario-Based Questions**
 1. If a producer sends messages faster than consumers can process them, how would you handle this scenario?
 2. You notice uneven load distribution across Kafka partitions. What steps would you take to resolve this?
