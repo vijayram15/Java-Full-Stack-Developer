@@ -1,4 +1,4 @@
-Let’s dive into **multithreading-related collections**, which are specialized classes from the **java.util.concurrent** package designed to handle concurrency efficiently.
+**Multithreading-related collections**, which are specialized classes from the **java.util.concurrent** package designed to handle concurrency efficiently.
 
 ---
 
