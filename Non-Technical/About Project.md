@@ -35,8 +35,8 @@ Involved in the Software Development Life Cycle phases which include Analysis, D
 Worked on various projects using methodologies like SDLC, Agile and Dev Ops
 
 
-Currently I am working in RWS project which have multiple modules like RWS ui, audit trail, financial data tab nd cap.
-Majorly I worked on RWS ui module and audit trail modules. RWS ui module provides inbox which consists ui and backend service to provide the user specific data to logged in users.
+Currently I am working in RWS project which have multiple modules like RWS ui, audit trail, financial data tab and cap.
+Majorly I worked on RWS ui module in that specifically inbox and audit trail modules. Basically  inbox which consists ui and backend service to provide the user specific data to logged in users. We have few other microservices like workflow service, ewi service, party services and etc.
 The data flows from ewi service which will pull the data from LMS tables and pushes to kafka and workflow service which will consume the messages and stores the user specific basic details in bpm and other data in tables. So when user logged in to RWS UI inbox then the request goes to inbox services and from there using rest template will get the data from workflow service and show up in inbox ui. 
 
 Initially the inbox was combined with other modules ui code in RWS ui, but we created micro front end project for it and also we seperated the service layer of inbox also to another microservice.
