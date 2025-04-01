@@ -1,7 +1,7 @@
 1. About their projects?
 2. tell me about your project and your roles and responsbilities?	<-- ssgs
 3. why you want to change?	-> stable now and not much work further so that's why i am looking for a change
-4. Versions working on and JAVA 8 - features. <-- performance <-- about meta space
+4. Versions working on and JAVA 8 - features. <-- performance --> about meta space, streams parallel processing
 5. NoClassDefinitionFoundException ?	|| 	Exceptions hirarchy?
 6. Spring boot --> Two Data source ?  @Primary  and @Qualifier(name="datasourcce2")
 7. SQL Query performance evaluation?  --> indxing
@@ -24,6 +24,7 @@
     a = a - b; // a now holds the original value of b 
     ```
     Second way
+
     ```
     a = a ^ b; // a now holds the XOR of original a and b 
     b = a ^ b; // b now holds the original value of a 
