@@ -16,7 +16,7 @@
 13. how to swap values without using third variable in java?
     A.
 
-    ```
+    ```java
     int a = 10; 
     int b = 20; 
     a = a + b; // a now holds the sum of original a and b 
@@ -25,7 +25,7 @@
     ```
     Second way
 
-    ```
+    ```java
     a = a ^ b; // a now holds the XOR of original a and b 
     b = a ^ b; // b now holds the original value of a 
     a = a ^ b; // a now holds the original value of b
@@ -38,4 +38,5 @@
     L - Liskov Subtitution Principle
     I - Interface segregation principle
     D - Dependency Inversion principle
-17.
+17. Global Exceptions in Spring  boot  --> `@ControllerAdvice`, `@RestControllerAdvice` and  `@ExceptionHandler`
+18.
