@@ -2,13 +2,11 @@
 
 SOLID is an **acronym for five design principles intended to make software designs more understandable, flexible, and maintainable.**
 
-
 * **S:** Single Responsibility Principle (SRP)
-
 * **O:** Open/Closed Principle (OCP)
 * **L:** Liskov Substitution Principle (LSP)
 * **I:** Interface Segregation Principle (ISP)
-* **D:** Dependency Inversion Principle^2^ (DIP)
+* **D:** Dependency Inversion Principle (DIP)
 
 **Interview Approach:**
 
@@ -61,7 +59,7 @@ SOLID is an **acronym for five design principles intended to make software desig
 
 * **Explanation:**
   * **High-level modules should not depend on low-level modules. Both should depend on abstractions.**
-  * **Abstractions should not depend on details. Details should depend**^3^ on abstractions.
+  * **Abstractions should not depend on details. Details should depend** on abstractions.
 * **Example:**
   * **Bad:** A `ReportService` class that directly depends on a specific `Database` class.
   * **Good:** Using an `IDataAccess` interface and dependency injection.
@@ -73,7 +71,7 @@ SOLID is an **acronym for five design principles intended to make software desig
 
 **Java**
 
-```
+```java
 // Bad: Tight coupling
 class ReportService {
     private Database database = new Database(); // Direct dependency
