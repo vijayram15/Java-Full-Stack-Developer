@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "7e70ff80cb5b2683",
+        "id": "ffd60c66e68febc1",
         "type": "tabs",
         "children": [
           {
-            "id": "fae778eecfd00b34",
+            "id": "d627fc2970bbe15d",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -151,7 +151,7 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "fae778eecfd00b34",
+  "active": "d627fc2970bbe15d",
   "lastOpenFiles": [
     "SOLID_Principles.md",
     "Non-Technical/About Project.md",
